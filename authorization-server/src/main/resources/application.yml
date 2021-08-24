@@ -5,6 +5,9 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/spring-security?serverTimezone=UTC
     username: root
     password:
+    schema: classpath:oauth2-schema-mysql.sql
+    initialization-mode: always
+    data: classpath:oauth2-data-mysql.sql
   jpa:
     database: MySQL
     show-sql: true
@@ -16,7 +19,3 @@ spring:
   main:
     # 允许覆盖 OAuth2 放在容器中的 Bean 对象
     allow-bean-definition-overriding: true
-
-logging:
-  level:
-    root: debug
