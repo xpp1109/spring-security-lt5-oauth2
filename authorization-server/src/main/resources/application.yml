@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    # mysql 驱动 6.0 以上使用如下配置
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/spring-security?serverTimezone=UTC
+    username: root
+    password:
+  jpa:
+    database: MySQL
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update # 没有表创建表，有表更新表
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl  # 命名策略
+  main:
+    # 允许覆盖 OAuth2 放在容器中的 Bean 对象
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    root: debug
