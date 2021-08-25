@@ -406,3 +406,7 @@
 
 
 > 本文使用的事spring-security-oauth2实现，在spring security 5以后已经弃用，后续会单独使用security实现。敬请期待，期待您的关注。期待您的意见。
+
+
+
+> 源码地址：https://github.com/xpp1109/spring-security-lt5-oauth2
