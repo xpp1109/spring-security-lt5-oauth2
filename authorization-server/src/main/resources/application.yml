@@ -1,21 +1,21 @@
 spring:
   datasource:
-    # mysql 驱动 6.0 以上使用如下配置
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/spring-security?serverTimezone=UTC
     username: root
     password:
-    schema: classpath:oauth2-schema-mysql.sql
+    schema: classpath:oauth-schema-mysql.sql
     initialization-mode: always
-    data: classpath:oauth2-data-mysql.sql
+    type: com.zaxxer.hikari.HikariDataSource
+    data:
+      - classpath:oauth2-data-mysql.sql
   jpa:
     database: MySQL
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: update # 没有表创建表，有表更新表
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl  # 命名策略
+      ddl-auto: create-drop
+    open-in-view: false
   main:
     # 允许覆盖 OAuth2 放在容器中的 Bean 对象
     allow-bean-definition-overriding: true

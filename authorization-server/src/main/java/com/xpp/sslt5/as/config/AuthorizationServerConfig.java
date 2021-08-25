@@ -22,11 +22,6 @@ import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
 
-/**
- * 此类会开放两个地址：/oauth/check_token 和 /oauth/token_key
- * 但是默认security会拦截所有请求（denyAll()）
- * . tokenKeyAccess() 和 checkTokenAccess() 两个方法的设置会放行上面两个Endpoint;
- */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
