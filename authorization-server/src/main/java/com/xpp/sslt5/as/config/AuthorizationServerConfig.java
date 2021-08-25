@@ -40,7 +40,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     // token 保存策略，指你生成的 Token 要往哪里存储
-    // 存在数据库：new JdbcApprovalStore(dataSource)，存在内存中：new InMemoryTokenStore()
+    // 有四种，JdbcTokenStore ， InMemoryTokenStore， JwkTokenStore，JwtTokenStore, RedisTokenStore
     @Bean
     public TokenStore tokenStore() {
         return new JdbcTokenStore(dataSource);
