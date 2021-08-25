@@ -3,6 +3,7 @@ package com.xpp.sslt5.as.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -17,8 +18,11 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
 
@@ -42,8 +46,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     // token 保存策略，指你生成的 Token 要往哪里存储
     // 有四种，JdbcTokenStore ， InMemoryTokenStore， JwkTokenStore，JwtTokenStore, RedisTokenStore
     @Bean
-    public TokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource);
+    public TokenStore tokenStore(){
+        return new JwtTokenStore(accessTokenConverter());
+    }
+
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter(){
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setSigningKey("xpp");
+        return converter;
     }
 
     // 指定客户端信息的数据库来源
@@ -68,6 +79,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     // 令牌管理
     @Bean
+    @Primary
     public AuthorizationServerTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         // token 保存策略
@@ -80,7 +92,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         tokenServices.setAccessTokenValiditySeconds(60 * 60 * 12);
         // refresh token 有效期自定义设置，默认 30 天
         tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
-
+        // 转化为jwt
+        tokenServices.setTokenEnhancer(accessTokenConverter());
         return tokenServices;
     }
 
