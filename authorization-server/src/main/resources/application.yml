@@ -1,16 +1,16 @@
 spring:
   datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/spring-security?serverTimezone=UTC
-    username: root
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:~/spring-oauth2db
+    username: sa
     password:
-    schema: classpath:oauth-schema-mysql.sql
+    schema: classpath:oauth-schema.sql
     initialization-mode: always
     type: com.zaxxer.hikari.HikariDataSource
     data:
-      - classpath:oauth2-data-mysql.sql
+      - classpath:oauth2-data.sql
   jpa:
-    database: MySQL
+    database: H2
     show-sql: true
     generate-ddl: true
     hibernate:
@@ -19,3 +19,9 @@ spring:
   main:
     # 允许覆盖 OAuth2 放在容器中的 Bean 对象
     allow-bean-definition-overriding: true
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    root: debug

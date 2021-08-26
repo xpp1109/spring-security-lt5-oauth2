@@ -70,9 +70,9 @@
       │   │                       └── UserDetailSvc.java							// security user Details类
       │   └── resources												// 源文件目录
       │       ├── application.yml							// spring boot 配置文件
-      │       ├── oauth2-data-mysql.sql				// 初始化oauth2数据sql
+      │       ├── oauth2-data.sql				// 初始化oauth2数据sql
       │       ├── import.sql									// jpa初始化Account表语句
-      │       └── oauth2-schema-mysql.sql			// 初始化创建oauth2相关表语句
+      │       └── oauth2-schema.sql			// 初始化创建oauth2相关表语句
       └── test																// 测试源码路径
           └── java
   ```
@@ -123,8 +123,9 @@
               <version>2.5.1.RELEASE</version>
           </dependency>
           <dependency>
-              <groupId>mysql</groupId>
-              <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
           </dependency>
       </dependencies>
   </project>
