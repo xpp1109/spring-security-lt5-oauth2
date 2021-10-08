@@ -378,7 +378,7 @@
 
 * 简化模式
 
-  访问监护模式地址：http://localhost:8080/oauth/authorize?response_type=token&client_id=xpp
+  访问简化模式地址：http://localhost:8080/oauth/authorize?response_type=token&client_id=xpp
 
   输入用户名密码（同一个client下的用户如果授权过不会出现登录界面），输入密码登录后, 点击授权和authorize按钮，浏览器自动跳转到百度，地址来为：https://www.baidu.com/#access_token=Pfa4YiIoN3Z1C2e1q-GV_E023C4&token_type=bearer&expires_in=43199&scope=read
 
